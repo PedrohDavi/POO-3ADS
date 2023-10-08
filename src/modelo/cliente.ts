@@ -2,22 +2,20 @@ import CPF from "./cpf"
 import Produto from "./produto"
 import RG from "./rg"
 import Servico from "./servico"
-import Telefone from "./telefone"
 
 let proximoId = 1;
 
 export default class Cliente {
-    public id: number
-    public nome: string
-    public nomeSocial: string
-    public sexo: string
+    private id: number
+    private nome: string
+    private nomeSocial: string
+    readonly sexo: string
     private cpf: CPF
     private rgs: Array<RG>
     private dataCadastro: Date
     private telefone: number
     private produtosConsumidos: Array<Produto>
     private servicosConsumidos: Array<Servico>
-    static id: number
     constructor(nome: string, nomeSocial: string, sexo: string, cpf: CPF, telefone: number) {
         this.id = proximoId++
         this.nome = nome
@@ -29,6 +27,15 @@ export default class Cliente {
         this.telefone = telefone
         this.produtosConsumidos = []
         this.servicosConsumidos = []
+    }
+    public get getId(): number{
+        return this.id
+    }
+    public get getNome(): string{
+        return this.nome
+    }
+    public get getNomeSocial(): string{
+        return this.nomeSocial
     }
     public get getCpf(): CPF {
         return this.cpf
@@ -48,4 +55,12 @@ export default class Cliente {
     public get getServicosConsumidos(): Array<Servico> {
         return this.servicosConsumidos
     }
+
+
+      // Método para atualizar apenas nome, nome social e telefone
+    public atualizarDados(nome: string, nomeSocial: string, telefone: number): void {
+        this.nome = nome;
+        this.nomeSocial = nomeSocial;
+        this.telefone = telefone;
+  }
 }
