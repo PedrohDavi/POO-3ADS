@@ -63,4 +63,8 @@ export default class Cliente {
         this.nomeSocial = nomeSocial;
         this.telefone = telefone;
   }
+
+    public adicionarProduto(produto: Produto){
+        this.produtosConsumidos.push(produto)
+    }
 }

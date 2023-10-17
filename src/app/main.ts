@@ -20,6 +20,8 @@ while (execucao) {
     console.log(`6 - Listar todos os produtos`);
     console.log(`7 - Editar produto`);
     console.log(`8 - Excluir produto`);
+    console.log(`9 - Consumir produto`);
+    
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -97,6 +99,24 @@ while (execucao) {
             console.log(`Produto com ID ${idExcluirProduto} não encontrado.`);
                 }
                 break;
+                case 9:
+                    const idCliente = entrada.receberNumero(`Digite o id do cliente que irá consumir um produto: `);
+                    const clienteExist = empresa.getClientes.find((cliente) => cliente.getId === idCliente);
+                  
+                    if (clienteExist) {
+                      const produtoId = entrada.receberNumero(`Digite o ID do produto que deseja adicionar ao cliente: `);
+                      const produto = empresa.getProdutos.find((p) => p.getId === produtoId);
+                  
+                      if (produto) {
+                        clienteExist.adicionarProduto(produto); 
+                        console.log(`Produto adicionado ao cliente com sucesso.`);
+                      } else {
+                        console.log(`Produto não encontrado.`);
+                      }
+                    } else {
+                      console.log(`Cliente não encontrado.`);
+                    }
+                    break;
         case 0:
             execucao = false
             console.log(`Até mais`)
