@@ -13,10 +13,10 @@ export default class Cliente {
     private cpf: CPF
     private rgs: Array<RG>
     private dataCadastro: Date
-    private telefone: number
+    private telefone: string
     private produtosConsumidos: Array<Produto>
     private servicosConsumidos: Array<Servico>
-    constructor(nome: string, nomeSocial: string, sexo: string, cpf: CPF, telefone: number) {
+    constructor(nome: string, nomeSocial: string, sexo: string, cpf: CPF, telefone: string) {
         this.id = proximoId++
         this.nome = nome
         this.nomeSocial = nomeSocial
@@ -46,7 +46,7 @@ export default class Cliente {
     public get getDataCadastro(): Date {
         return this.dataCadastro
     }
-    public get getTelefones(): number {
+    public get getTelefones(): string {
         return this.telefone
     }
     public get getProdutosConsumidos(): Array<Produto> {
@@ -58,7 +58,7 @@ export default class Cliente {
 
 
       // Método para atualizar apenas nome, nome social e telefone
-    public atualizarDados(nome: string, nomeSocial: string, telefone: number): void {
+    public atualizarDados(nome: string, nomeSocial: string, telefone: string): void {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.telefone = telefone;

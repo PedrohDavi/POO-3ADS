@@ -1,13 +1,42 @@
 import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
+import CPF from "../modelo/cpf";
 import Empresa from "../modelo/empresa"
+import Produto from "../modelo/produto";
 import ListagemProdutos from "../negocio/ListagemProdutos";
 import CadastroCliente from "../negocio/cadastroCliente";
 import CadastroProduto from "../negocio/cadastroProduto";
 import ListagemClientes from "../negocio/listagemClientes";
+import casual from 'casual';
 
 console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
 let empresa = new Empresa()
+
+// Loop para criar 25 clientes com nomes fictícios
+for (let i = 1; i <= 30; i++) {
+  const nome = casual.full_name;
+  const nomeSocial = casual.first_name;
+  const sexo = i % 2 === 0 ? "F" : "M"; // Alternando entre Masculino e Feminino
+  const cpf = new CPF("1234567890" + i, new Date(`2020-03-${i < 10 ? '0' + i : i}`));
+  const telefone = casual.phone; // Gera um número de telefone fictício
+
+  const cliente = new Cliente(nome, nomeSocial, sexo, cpf, telefone);
+
+  // Adicione o cliente à lista da empresa
+  empresa.getClientes.push(cliente);
+}
+
+// Loop para criar 20 produtos fictícios
+for (let i = 1; i <= 20; i++) {
+  const nomeProduto = casual.title;
+  const preco = casual.double(1, 100); // Gera um preço fictício entre 1 e 100
+
+  const produto = new Produto(nomeProduto, preco);
+
+  // Adicione o produto à lista da empresa
+  empresa.getProdutos.push(produto);
+}
+
 let execucao = true
 
 while (execucao) {
@@ -21,6 +50,8 @@ while (execucao) {
     console.log(`7 - Editar produto`);
     console.log(`8 - Excluir produto`);
     console.log(`9 - Consumir produto`);
+    console.log(`11 - Listar Top 10 clientes que mais consumiram produtos`);
+    
     
     console.log(`0 - Sair`);
 
@@ -34,7 +65,7 @@ while (execucao) {
             break;
         case 2:
             let listagemClientes = new ListagemClientes(empresa.getClientes)
-            listagemClientes.listar()
+            listagemClientes.listarTodos()
             break;
         case 3:
             const idEditarCliente = entrada.receberNumero("Digite o ID do cliente que deseja editar: ");
@@ -43,7 +74,7 @@ while (execucao) {
             if (clienteExistente) {
                 const nomeNovo = entrada.receberTexto(`Digite o novo nome (${clienteExistente.getNome}): `) || clienteExistente.getNome;
                 const nomeSocialNovo = entrada.receberTexto(`Digite o novo nome social (${clienteExistente.getNomeSocial}): `) || clienteExistente.getNomeSocial;
-                const telefoneNovo = entrada.receberNumero(`Digite o novo telefone (${clienteExistente.getTelefones}): `) || clienteExistente.getTelefones;
+                const telefoneNovo = entrada.receberTexto(`Digite o novo telefone (${clienteExistente.getTelefones}): `) || clienteExistente.getTelefones;
               
                 // Atualize os dados do cliente diretamente
                 clienteExistente.atualizarDados(nomeNovo, nomeSocialNovo, telefoneNovo);
@@ -99,24 +130,28 @@ while (execucao) {
             console.log(`Produto com ID ${idExcluirProduto} não encontrado.`);
                 }
                 break;
-                case 9:
-                    const idCliente = entrada.receberNumero(`Digite o id do cliente que irá consumir um produto: `);
-                    const clienteExist = empresa.getClientes.find((cliente) => cliente.getId === idCliente);
+        case 9:
+            const idCliente = entrada.receberNumero(`Digite o id do cliente que irá consumir um produto: `);
+            const clienteExist = empresa.getClientes.find((cliente) => cliente.getId === idCliente);
                   
-                    if (clienteExist) {
-                      const produtoId = entrada.receberNumero(`Digite o ID do produto que deseja adicionar ao cliente: `);
-                      const produto = empresa.getProdutos.find((p) => p.getId === produtoId);
+              if (clienteExist) {
+                const produtoId = entrada.receberNumero(`Digite o ID do produto que deseja adicionar ao cliente: `);
+                const produto = empresa.getProdutos.find((p) => p.getId === produtoId);
                   
-                      if (produto) {
-                        clienteExist.adicionarProduto(produto); 
-                        console.log(`Produto adicionado ao cliente com sucesso.`);
-                      } else {
-                        console.log(`Produto não encontrado.`);
+                  if (produto) {
+                    clienteExist.adicionarProduto(produto); 
+                    console.log(`Produto adicionado ao cliente com sucesso.`);
+                    } else {
+                      console.log(`Produto não encontrado.`);
                       }
                     } else {
                       console.log(`Cliente não encontrado.`);
                     }
                     break;
+        case 11:
+          let listagemTop10Clientes = new ListagemClientes(empresa.getClientes);
+          listagemTop10Clientes.listar10ClientesPorConsumo();
+          break;
         case 0:
             execucao = false
             console.log(`Até mais`)
