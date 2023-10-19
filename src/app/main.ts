@@ -51,6 +51,7 @@ while (execucao) {
     console.log(`8 - Excluir produto`);
     console.log(`9 - Consumir produto`);
     console.log(`11 - Listar Top 10 clientes que mais consumiram produtos`);
+    console.log(`12 - Listar clientes por gênero`);
     
     
     console.log(`0 - Sair`);
@@ -151,6 +152,15 @@ while (execucao) {
         case 11:
           let listagemTop10Clientes = new ListagemClientes(empresa.getClientes);
           listagemTop10Clientes.listar10ClientesPorConsumo();
+          break;
+        case 12:
+          const listagemClientesGen = new ListagemClientes(empresa.getClientes);
+          const generoSelecionado = entrada.receberTexto("Digite o gênero (M para Masculino ou F para Feminino): ");
+            if (generoSelecionado === "M" || generoSelecionado === "F") {
+              listagemClientesGen.listarClientesPorGenero(generoSelecionado);
+    }       else {
+        console.log("Gênero inválido. Use 'M' para Masculino ou 'F' para Feminino.");
+    }
           break;
         case 0:
             execucao = false

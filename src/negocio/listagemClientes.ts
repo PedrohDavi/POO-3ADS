@@ -40,4 +40,18 @@ export default class ListagemClientes extends Listagem {
             console.log(`#${index + 1} - Nome: ${cliente.getNome}, Quantidade de Produtos Consumidos: ${cliente.getProdutosConsumidos.length}`);
         });
     }
+
+    public listarClientesPorGenero(genero: string): void {
+        const clientesPorGenero = this.clientes.filter(cliente => cliente.sexo === genero);
+
+        console.log(`Clientes do gênero ${genero}:`);
+        clientesPorGenero.forEach(cliente => {
+            console.log(`Nome: ${cliente.getNome}`);
+            console.log(`Nome Social: ${cliente.getNomeSocial}`);
+            console.log(`CPF: ${cliente.getCpf.getValor}`);
+            console.log(`Sexo: ${cliente.sexo}`);
+            console.log(`Telefone: ${cliente.getTelefones}`);
+            console.log(`--------------------------------------`);
+        });
+    }
 }
