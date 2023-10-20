@@ -17,10 +17,10 @@ export default class ListagemClientes extends Listagem {
             console.log(`Sexo: ` + cliente.sexo);
             console.log(`Telefone: ` + cliente.getTelefones);
 
-            console.log(`Produtos consumidos:`);
+            console.log(`Produtos consumidos: \n`);
             cliente.getProdutosConsumidos.forEach(produto => {
             console.log(`ID: ${produto.getId}, Nome: ${produto.getNome}, Preço: ${produto.getPreco}`);
-            console.log(`--------------------------------------`);
+            console.log(`-------------------------------------- \n`);
         });
     });
     console.log(`\n`);
@@ -37,6 +37,21 @@ export default class ListagemClientes extends Listagem {
 
         console.log(`\nTop 10 clientes que mais consumiram produtos:`);
         top10Clientes.forEach((cliente, index) => {
+            console.log(`#${index + 1} - Nome: ${cliente.getNome}, Quantidade de Produtos Consumidos: ${cliente.getProdutosConsumidos.length}`);
+        });
+    }
+
+    public listarClientesMenosConsumidores(): void {
+        // Classifique os clientes com base na quantidade de produtos consumidos em ordem crescente.
+        const clientesOrdenados = this.clientes.slice().sort((a, b) => {
+            return a.getProdutosConsumidos.length - b.getProdutosConsumidos.length;
+        });
+
+        // Pegue os 10 primeiros clientes da lista classificada, que são os que menos consumiram produtos.
+        const clientesMenosConsumidores = clientesOrdenados.slice(0, 10);
+
+        console.log(`\nTop 10 clientes que menos consumiram produtos:`);
+        clientesMenosConsumidores.forEach((cliente, index) => {
             console.log(`#${index + 1} - Nome: ${cliente.getNome}, Quantidade de Produtos Consumidos: ${cliente.getProdutosConsumidos.length}`);
         });
     }

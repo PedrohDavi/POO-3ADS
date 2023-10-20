@@ -8,11 +8,15 @@ import CadastroCliente from "../negocio/cadastroCliente";
 import CadastroProduto from "../negocio/cadastroProduto";
 import ListagemClientes from "../negocio/listagemClientes";
 import casual from 'casual';
+import ListagemProdutosMaisConsumidos from "../negocio/listagemProdutosMaisConsumidos";
 
 console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
 let empresa = new Empresa()
+const listagemProdutosMaisConsumidos = new ListagemProdutosMaisConsumidos(empresa.getClientes);
+const listagemClientesMenosConsumidos = new ListagemClientes(empresa.getClientes);
 
-// Loop para criar 25 clientes com nomes fictícios
+
+// Loop para criar 30 clientes com nomes fictícios
 for (let i = 1; i <= 30; i++) {
   const nome = casual.full_name;
   const nomeSocial = casual.first_name;
@@ -29,7 +33,7 @@ for (let i = 1; i <= 30; i++) {
 // Loop para criar 20 produtos fictícios
 for (let i = 1; i <= 20; i++) {
   const nomeProduto = casual.title;
-  const preco = casual.double(1, 100); // Gera um preço fictício entre 1 e 100
+  const preco = casual.integer(1, 100); // Gera um preço fictício entre 1 e 100
 
   const produto = new Produto(nomeProduto, preco);
 
@@ -52,6 +56,8 @@ while (execucao) {
     console.log(`9 - Consumir produto`);
     console.log(`11 - Listar Top 10 clientes que mais consumiram produtos`);
     console.log(`12 - Listar clientes por gênero`);
+    console.log(`13 - Listar produtos mais consumidos`);
+    console.log(`14 - Listar clientes que menos consumiram produtos`);
     
     
     console.log(`0 - Sair`);
@@ -161,6 +167,12 @@ while (execucao) {
     }       else {
         console.log("Gênero inválido. Use 'M' para Masculino ou 'F' para Feminino.");
     }
+          break;
+        case 13:
+          listagemProdutosMaisConsumidos.listarProdutosMaisConsumidos();
+          break;
+        case 14:
+          listagemClientesMenosConsumidos.listarClientesMenosConsumidores();
           break;
         case 0:
             execucao = false

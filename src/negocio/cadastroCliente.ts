@@ -18,7 +18,7 @@ export default class CadastroCliente extends Cadastro {
         let sexo = this.entrada.receberTexto(`Por favor informe seu sexo (M para masculino F para feminino): `)
         let valor = this.entrada.receberTexto(`Por favor informe o número do cpf: `);
         let data = this.entrada.receberTexto(`Por favor informe sua data de nascimento no padrão dd/mm/yyyy: `);
-        let telefone = this.entrada.receberNumero(`Por favor informe um telefone para contato: `);
+        let telefone = this.entrada.receberTexto(`Por favor informe um telefone para contato: `);
         let partesData = data.split('/')
         let ano = new Number(partesData[2].valueOf()).valueOf()
         let mes = new Number(partesData[1].valueOf()).valueOf()
