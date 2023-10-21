@@ -37,6 +37,9 @@ export default class Cliente {
     public get getNomeSocial(): string{
         return this.nomeSocial
     }
+    public get getSexo(): string{
+        return this.sexo
+    }
     public get getCpf(): CPF {
         return this.cpf
     }

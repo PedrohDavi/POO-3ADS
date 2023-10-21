@@ -41,6 +41,24 @@ export default class ListagemClientes extends Listagem {
         });
     }
 
+    public listarTop5ClientesPorValorConsumido(): void {
+        // Classifique os clientes com base no valor total dos produtos consumidos em ordem decrescente.
+        const clientesOrdenados = this.clientes.slice().sort((a, b) => {
+            const valorTotalA = a.getProdutosConsumidos.reduce((total, produto) => total + produto.getPreco, 0);
+            const valorTotalB = b.getProdutosConsumidos.reduce((total, produto) => total + produto.getPreco, 0);
+            return valorTotalB - valorTotalA;
+        });
+    
+        // Pegue os top 5 clientes da lista classificada.
+        const top5Clientes = clientesOrdenados.slice(0, 5);
+    
+        console.log(`\nTop 5 clientes que mais consumiram produtos por valor:`);
+        top5Clientes.forEach((cliente, index) => {
+            const valorTotal = cliente.getProdutosConsumidos.reduce((total, produto) => total + produto.getPreco, 0);
+            console.log(`#${index + 1} - Nome: ${cliente.getNome}, Valor Total Consumido: ${valorTotal} reais`);
+        });
+    }
+
     public listarClientesMenosConsumidores(): void {
         // Classifique os clientes com base na quantidade de produtos consumidos em ordem crescente.
         const clientesOrdenados = this.clientes.slice().sort((a, b) => {

@@ -14,7 +14,7 @@ console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
 let empresa = new Empresa()
 const listagemProdutosMaisConsumidos = new ListagemProdutosMaisConsumidos(empresa.getClientes);
 const listagemClientesMenosConsumidos = new ListagemClientes(empresa.getClientes);
-
+const listagemClientesValor = new ListagemClientes(empresa.getClientes);
 
 // Loop para criar 30 clientes com nomes fictícios
 for (let i = 1; i <= 30; i++) {
@@ -49,7 +49,7 @@ while (execucao) {
     console.log(`2 - Listar todos os clientes`);
     console.log(`3 - Editar cliente`);
     console.log(`4 - Excluir cliente`);
-    console.log(`5 - Cadastrar produtos`);
+    console.log(`5 - Cadastrar produto`);
     console.log(`6 - Listar todos os produtos`);
     console.log(`7 - Editar produto`);
     console.log(`8 - Excluir produto`);
@@ -58,8 +58,8 @@ while (execucao) {
     console.log(`12 - Listar clientes por gênero`);
     console.log(`13 - Listar produtos mais consumidos`);
     console.log(`14 - Listar clientes que menos consumiram produtos`);
-    
-    
+    console.log(`15 - Listar produtos mais consumidos por gênero`);
+    console.log(`16 - Listar clientes que mais gastaram`);
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -173,6 +173,18 @@ while (execucao) {
           break;
         case 14:
           listagemClientesMenosConsumidos.listarClientesMenosConsumidores();
+          break;
+        case 15:
+          const generoSelec = entrada.receberTexto("Digite o gênero (M para Masculino ou F para Feminino): ");
+            if (generoSelec === "M" || generoSelec === "F") {
+          const listagemProdutosMaisConsumidos = new ListagemProdutosMaisConsumidos(empresa.getClientes);
+          listagemProdutosMaisConsumidos.listarProdutosMaisConsumidosPorGenero(generoSelec);
+      }     else {
+              console.log("Gênero inválido. Use 'M' para Masculino ou 'F' para Feminino.");
+            }
+          break;
+        case 16:
+          listagemClientesValor.listarTop5ClientesPorValorConsumido();
           break;
         case 0:
             execucao = false

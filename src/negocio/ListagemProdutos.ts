@@ -13,6 +13,7 @@ export default class ListagemProdutos extends Listagem {
         super()
         this.produtos = produtos
     }
+
     public listar(): void {
         console.log(`\nLista de todos os produtos:`);
         this.produtos.forEach(produtos => {
