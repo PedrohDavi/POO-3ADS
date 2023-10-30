@@ -3,10 +3,14 @@ import BarraNavegacao from "./barraNavegacao";
 import FormularioCadastroCliente from "./formularioCadastroCliente";
 import ListaCliente from "./listaCliente";
 import ListaProduto from "./listaProduto";
+import FormularioCadastroProduto from "./formularioCadastroProduto";
 
 type state = {
     tela: string
     tela2: string
+    tela3: string
+    tela4: string
+    tela5: string
 }
 
 export default class Roteador extends Component<{}, state> {
@@ -14,7 +18,10 @@ export default class Roteador extends Component<{}, state> {
         super(props)
         this.state = {
             tela: 'Clientes',
-            tela2: 'Produtos'
+            tela2: 'Produtos',
+            tela3: 'CadastroCliente',
+            tela4: 'CadastroProduto',
+            tela5: 'RegistrarConsumo'
         }
         this.selecionarView = this.selecionarView.bind(this)
     }
@@ -28,31 +35,30 @@ export default class Roteador extends Component<{}, state> {
     }
 
     render() {
-        let barraNavegacao = <BarraNavegacao seletorView={this.selecionarView} tema="purple lighten-4" botoes={['Clientes', 'Produtos','Cadastros']} />
+        let telaRenderizada;
+      
         if (this.state.tela === 'Clientes') {
-            return (
-                <>
-                    {barraNavegacao}
-                    <ListaCliente tema="purple lighten-4" />
-                </>
-            )
+          telaRenderizada = <ListaCliente tema="purple lighten-4" />;
+        } else if (this.state.tela === 'Produtos') {
+          telaRenderizada = <ListaProduto tema="purple lighten-4" />;
+        } else if (this.state.tela3 === 'CadastroCliente') {
+          telaRenderizada = <FormularioCadastroCliente tema="purple lighten-4" />;
+        } else if(this.state.tela5 === 'CadastroProduto'){
+            telaRenderizada = <FormularioCadastroProduto tema="purple lighten-4" />
+        } else {
+          telaRenderizada = (
+            <div className="container">
+              <h1>Página não encontrada</h1>
+              <p>A tela especificada não existe.</p>
+            </div>
+          );
         }
-        else if(this.state.tela2 === 'Produtos'){
-            return (
-                <>
-                    {barraNavegacao}
-                    <ListaProduto tema="purple lighten-4"/>
-                </>
-            )
-        }
-        else {
-            return (
-                <>
-                    {barraNavegacao}
-                    <FormularioCadastroCliente tema="purple lighten-4" />
-                </>
-            )
-        }
-
-    }
+      
+        return (
+          <>
+            <BarraNavegacao seletorView={this.selecionarView} tema="purple lighten-4" botoes={['Clientes', 'Produtos', 'Cadastro de Clientes', 'Cadastro de Produtos', 'Registrar Consumo']} />
+            {telaRenderizada}
+          </>
+        );
+      }
 }
