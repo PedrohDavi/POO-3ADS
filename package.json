@@ -12,10 +12,6 @@
     "@types/node": "^16.7.10",
     "@types/prompt-sync": "^4.1.1",
     "casual": "^1.6.2",
-    "faker": "^6.6.6",
     "prompt-sync": "^4.2.0"
-  },
-  "devDependencies": {
-    "@types/faker": "^6.6.9"
   }
 }
