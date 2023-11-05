@@ -1,52 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Component } from "react";
-import 'materialize-css/dist/css/materialize.min.css'
-import M from 'materialize-css'
+import { Component, ReactNode } from "react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
-type props = {
-    tema: string,
-    botoes: string[],
-    seletorView: Function
-}
 
-export default class BarraNavegacao extends Component<props> {
-    constructor(props: props | Readonly<props>) {
-        super(props)
-        this.gerarListaBotoes = this.gerarListaBotoes.bind(this)
-    }
 
-    componentDidMount() {
-        document.addEventListener('DOMContentLoaded', function () {
-            let elems = document.querySelectorAll('.sidenav');
-            M.Sidenav.init(elems)
-        });
-    }
-
-    gerarListaBotoes() {
-        if (this.props.botoes.length <= 0) {
-            return <></>
-        } else {
-            let lista = this.props.botoes.map(valor =>
-                <li key={valor}><a onClick={(e) => this.props.seletorView(valor, e)}>{valor}</a></li>
-            )
-            return lista
-        }
-    }
-
+ class BarraNavegacao extends Component {
     render() {
         return (
-            <>
-                <nav className='#880e4f pink darken-4'>
-                        <a className="brand-logo">WB</a>
-                        <a data-target="mobile-menu" className="sidenav-trigger"><i className="material-icons">menu</i></a>
-                        <ul className="right hide-on-med-and-down">
-                            {this.gerarListaBotoes()}
-                        </ul>
-                </nav>
-                <ul className="sidenav" id="mobile-menu">
-                    {this.gerarListaBotoes()}
-                </ul>
-            </>
-        )
+          <Flex>
+            <Box bg={"#808080"} width={"100%"} height={"4.5rem"} display={"flex"}>
+                <Text paddingRight={"1.5rem"}>Botão 1</Text>
+                <Text paddingRight={"1.5rem"}>Botão 2</Text>
+                <Text paddingRight={"1.5rem"}>Botão 3</Text>
+                <Text paddingRight={"1.5rem"}>Botão 4</Text>
+                <Text paddingRight={"1.5rem"}>Botão 5</Text>
+            </Box>
+          </Flex>
+        );
+      }
     }
-}
+
+export default BarraNavegacao;

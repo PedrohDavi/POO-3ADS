@@ -10,12 +10,15 @@ import BarraNavegacao from "./barraNavegacao";
 export default class ListaCliente extends React.Component{
     render() {
         return (
-            <div className="collection">
-                <a className="collection-item">Cliente 1</a>
-                <a className="collection-item">Cliente 2</a>
-                <a className="collection-item">Cliente 3</a>
-                <a className="collection-item">Cliente 4</a>
-            </div>
+            <div>
+                <BarraNavegacao/>
+                <div className="collection">
+                    <a className="collection-item">Cliente 1</a>
+                    <a className="collection-item">Cliente 2</a>
+                    <a className="collection-item">Cliente 3</a>
+                    <a className="collection-item">Cliente 4</a>
+                </div>
+            </div> 
         )
     }
 }
