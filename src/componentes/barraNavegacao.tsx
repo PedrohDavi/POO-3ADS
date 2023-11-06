@@ -9,20 +9,25 @@ import { Link } from "react-router-dom";
     render() {
         return (
           <Flex>
-            <Box bg={"#808080"} width={"100%"} height={"4.5rem"} display={"flex"}justifyContent="right">
+            <Box bg={"#ffff00"} width={"100%"} height={"4.5rem"} display={"flex"}justifyContent="right">
               <Link to="/">
-                  <Text paddingRight={"1.5rem"}>Lista de Clientes</Text>
+                  <Text paddingRight={"1.5rem"} color={"#000000"}>Lista de Clientes</Text>
               </Link>
               <Link to="/lista-de-produtos">
-                  <Text paddingRight={"1.5rem"}>Lista de produtos</Text>
+                  <Text paddingRight={"1.5rem"} color={"#000000"}>Lista de produtos</Text>
               </Link>
               <Link to="/cadastro-de-clientes">
-                <Text paddingRight={"1.5rem"}>Cadastrar cliente</Text>
+                <Text paddingRight={"1.5rem"} color={"#000000"}>Cadastrar cliente</Text>
               </Link>
               <Link to="/cadastro-de-produtos">
-                <Text paddingRight={"1.5rem"}>Cadastrar Produto</Text>
+                <Text paddingRight={"1.5rem"} color={"#000000"}>Cadastrar Produto</Text>
               </Link>
-                <Text paddingRight={"1.5rem"}>Registrar consumo</Text>
+              <Link to="/registro-de-consumo">
+                <Text paddingRight={"1.5rem"} color={"#000000"}>Registrar consumo</Text>
+              </Link>
+              <Link to="/listagens">
+                <Text paddingRight={"1.5rem"} color={"#000000"}>Listagens</Text>
+              </Link>
             </Box>
           </Flex>
         );
