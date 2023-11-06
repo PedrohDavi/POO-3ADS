@@ -1,44 +1,42 @@
-import { Component } from "react";
+import React from "react";
+import BarraNavegacao from "./barraNavegacao";
+import { Input } from "@chakra-ui/react";
 
-type props = {
-    tema: string
-}
 
-export default class FormularioCadastroCliente extends Component<props> {
+
+export default class FormularioCadastroCliente extends React.Component {
     
     render() {
-        let estiloBotao = `btn waves-effect waves-light ${this.props.tema}`
         return (
+            <div>
+            <BarraNavegacao/>
             <div className="row">
                 <form className="col s12">
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="first_name" type="text" className="validate" />
-                            <label htmlFor="first_name">nome</label>
+                            <Input variant='flushed' placeholder='Nome' />
                         </div>
                         <div className="input-field col s6">
-                            <input id="last_name" type="text" className="validate" />
-                            <label htmlFor="last_name">sobrenome</label>
+                            <Input variant='flushed' placeholder='Sobrenome' />
                         </div>
                     </div>
                     <div className="row">
                         <div className="input-field col s6">
-                            <input id="telefone" type="text" className="validate" />
-                            <label htmlFor="telefone">telefone</label>
+                            <Input variant='flushed' placeholder='Telefone' />
                         </div>
                         <div className="input-field col s6">
-                            <input id="email" type="email" className="validate" />
-                            <label htmlFor="email">e-mail</label>
+                            <Input variant='flushed' placeholder='E-mail' />
                         </div>
                     </div>
                     <div className="row">
                         <div className="col s12">
-                            <button className={estiloBotao} type="submit" name="action">Submit
+                            <button  type="submit" name="action">Cadastrar
                                 <i className="material-icons right">send</i>
                             </button>
                         </div>
                     </div>
                 </form>
+            </div>
             </div>
         )
     }
