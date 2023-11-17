@@ -16,11 +16,16 @@ export default class ListagemClientes extends Listagem {
             console.log(`CPF: ` + cliente.getCpf.getValor);
             console.log(`RG: ` + cliente.getRgs.getValor);
             console.log(`Sexo: ` + cliente.sexo);
+            console.log(`Data de Cadastro: ${cliente.getDataCadastro.toLocaleString()}`); // Formata a data de cadastro
             // Imprimir telefones
             console.log(`Telefones:`);
-            cliente.getTelefones.forEach(telefone => {
-                console.log(`DDD: ${telefone.getDdd}, Número: ${telefone.getNumero}`);
-            });
+            if (cliente.getTelefones.length > 0) {
+                cliente.getTelefones.forEach(telefone => {
+                    console.log(`  DDD: ${telefone.getDdd}, Número: ${telefone.getNumero}`);
+                });
+            } else {
+                console.log("Nenhum telefone cadastrado.");
+            }
 
             console.log(`Produtos consumidos: \n`);
             cliente.getProdutosConsumidos.forEach(produto => {

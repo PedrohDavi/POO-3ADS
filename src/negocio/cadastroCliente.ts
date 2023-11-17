@@ -45,7 +45,7 @@ export default class CadastroCliente extends Cadastro {
 
         // CADASTRO DE RG
         let rg = this.entrada.receberTexto(`Por favor informe o número do RG: `);
-        let emissaoRg = this.entrada.receberTexto(`Informe a data de emissão do RG: `);
+        let emissaoRg = this.entrada.receberTexto(`Informe a data de emissão do RG no padrão dd/mm/yyyy:: `);
         let partesData2 = emissaoRg.split('/')
         let ano2 = new Number(partesData2[2].valueOf()).valueOf()
         let mes2 = new Number(partesData2[1].valueOf()).valueOf()
@@ -71,8 +71,8 @@ export default class CadastroCliente extends Cadastro {
         let ddd = this.entrada.receberTexto(`Informe o DDD do telefone: `);
         let novoTelefone = new Telefone(ddd, telefoneNumero);
         telefones.push(novoTelefone);
-}
         
+}  
         let cpf = new CPF(valor, dataNascimento);
         let cliente = new Cliente(nome, nomeSocial, sexo, cpf, RGs, telefones);
         this.clientes.push(cliente)
