@@ -2,6 +2,7 @@ import CPF from "./cpf"
 import Produto from "./produto"
 import RG from "./rg"
 import Servico from "./servico"
+import Telefone from "./telefone";
 
 let proximoId = 1;
 
@@ -11,20 +12,20 @@ export default class Cliente {
     private nomeSocial: string
     readonly sexo: string
     private cpf: CPF
-    private rgs: Array<RG>
+    private rgs: RG
     private dataCadastro: Date
-    private telefone: string
+    private telefone: Array<Telefone>
     private produtosConsumidos: Array<Produto>
     private servicosConsumidos: Array<Servico>
-    constructor(nome: string, nomeSocial: string, sexo: string, cpf: CPF, telefone: string) {
+    constructor(nome: string, nomeSocial: string, sexo: string, cpf: CPF, rgs: RG, telefone: Array<Telefone>) {
         this.id = proximoId++
         this.nome = nome
         this.nomeSocial = nomeSocial
         this.sexo = sexo
         this.cpf = cpf
-        this.rgs = []
+        this.rgs = rgs
         this.dataCadastro = new Date()
-        this.telefone = telefone
+        this.telefone = []
         this.produtosConsumidos = []
         this.servicosConsumidos = []
     }
@@ -43,13 +44,13 @@ export default class Cliente {
     public get getCpf(): CPF {
         return this.cpf
     }
-    public get getRgs(): Array<RG> {
+    public get getRgs(): RG {
         return this.rgs
     }
     public get getDataCadastro(): Date {
         return this.dataCadastro
     }
-    public get getTelefones(): string {
+    public get getTelefones(): Array<Telefone> {
         return this.telefone
     }
     public get getProdutosConsumidos(): Array<Produto> {
@@ -61,10 +62,10 @@ export default class Cliente {
 
 
       // Método para atualizar apenas nome, nome social e telefone
-    public atualizarDados(nome: string, nomeSocial: string, telefone: string): void {
+    public atualizarDados(nome: string, nomeSocial: string, telefone: Array<Telefone>): void {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
-        this.telefone = telefone;
+        this.telefone = [];
   }
 
     public adicionarProduto(produto: Produto){

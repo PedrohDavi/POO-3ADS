@@ -1,6 +1,7 @@
 import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import CPF from "../modelo/cpf";
+import RG from "../modelo/rg";
 import Empresa from "../modelo/empresa"
 import Produto from "../modelo/produto";
 import ListagemProdutos from "../negocio/ListagemProdutos";
@@ -9,6 +10,8 @@ import CadastroProduto from "../negocio/cadastroProduto";
 import ListagemClientes from "../negocio/listagemClientes";
 import casual from 'casual';
 import ListagemProdutosMaisConsumidos from "../negocio/listagemProdutosMaisConsumidos";
+import Telefone from "../modelo/telefone";
+
 
 console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
 let empresa = new Empresa()
@@ -22,9 +25,15 @@ for (let i = 1; i <= 30; i++) {
   const nomeSocial = casual.first_name;
   const sexo = i % 2 === 0 ? "F" : "M"; // Alternando entre Masculino e Feminino
   const cpf = new CPF("1234567890" + i, new Date(`2020-03-${i < 10 ? '0' + i : i}`));
+  const rg = new RG("12345678" + i, new Date(`2020-03-${i < 10 ? '0' + i : i}`));
   const telefone = casual.phone; // Gera um número de telefone fictício
+  // Criar uma instância de Telefone com o número de telefone gerado
+  const telefoneInstancia = new Telefone("DDD", telefone);
 
-  const cliente = new Cliente(nome, nomeSocial, sexo, cpf, telefone);
+  // Criar uma lista de telefones (nesse caso, apenas um telefone)
+  const listaTelefones = [telefoneInstancia];
+
+  const cliente = new Cliente(nome, nomeSocial, sexo, cpf, rg, listaTelefones);
 
   // Adicione o cliente à lista da empresa
   empresa.getClientes.push(cliente);
@@ -81,10 +90,16 @@ while (execucao) {
             if (clienteExistente) {
                 const nomeNovo = entrada.receberTexto(`Digite o novo nome (${clienteExistente.getNome}): `) || clienteExistente.getNome;
                 const nomeSocialNovo = entrada.receberTexto(`Digite o novo nome social (${clienteExistente.getNomeSocial}): `) || clienteExistente.getNomeSocial;
-                const telefoneNovo = entrada.receberTexto(`Digite o novo telefone (${clienteExistente.getTelefones}): `) || clienteExistente.getTelefones;
+                const telefoneNovo = entrada.receberTexto(`Digite o novo telefone (${clienteExistente.getTelefones.map(t => t.getNumero).join(', ')}): `);
+                const listaTelefonesNovos: Telefone[] = [];
+
+            if (telefoneNovo) {
+              const novoTelefone = new Telefone("DDD", telefoneNovo);
+              listaTelefonesNovos.push(novoTelefone);
+            }
               
                 // Atualize os dados do cliente diretamente
-                clienteExistente.atualizarDados(nomeNovo, nomeSocialNovo, telefoneNovo);
+                clienteExistente.atualizarDados(nomeNovo, nomeSocialNovo, listaTelefonesNovos);
               
                   console.log("Cliente atualizado com sucesso!");
                 } else {
