@@ -18,14 +18,8 @@ export default class ListagemClientes extends Listagem {
             console.log(`Sexo: ` + cliente.sexo);
             console.log(`Data de Cadastro: ${cliente.getDataCadastro.toLocaleString()}`); // Formata a data de cadastro
             // Imprimir telefones
-            console.log(`Telefones:`);
-            if (cliente.getTelefones.length > 0) {
-                cliente.getTelefones.forEach(telefone => {
-                    console.log(`  DDD: ${telefone.getDdd}, Número: ${telefone.getNumero}`);
-                });
-            } else {
-                console.log("Nenhum telefone cadastrado.");
-            }
+            console.log(`Telefones:` + cliente.getTelefones + " ||");
+            
 
             console.log(`Produtos consumidos: \n`);
             cliente.getProdutosConsumidos.forEach(produto => {
@@ -65,7 +59,7 @@ export default class ListagemClientes extends Listagem {
         console.log(`\nTop 5 clientes que mais consumiram produtos por valor:`);
         top5Clientes.forEach((cliente, index) => {
             const valorTotal = cliente.getProdutosConsumidos.reduce((total, produto) => total + produto.getPreco, 0);
-            console.log(`#${index + 1} - Nome: ${cliente.getNome}, Valor Total Consumido: ${valorTotal} reais`);
+            console.log(`#${index + 1} - Nome: ${cliente.getNome}, Valor Total Consumido: R$ ${valorTotal}`);
         });
     }
 

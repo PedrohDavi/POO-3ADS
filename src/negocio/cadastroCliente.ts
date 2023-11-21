@@ -2,7 +2,6 @@ import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import CPF from "../modelo/cpf";
 import RG from "../modelo/rg";
-import Telefone from "../modelo/telefone";
 import Cadastro from "./cadastro";
 
 export default class CadastroCliente extends Cadastro {
@@ -54,25 +53,23 @@ export default class CadastroCliente extends Cadastro {
         let RGs = new RG(rg, dataEmissaoRg);
 
         // CADASTRO DE TELEFONE(S)
-
-        let telefones: Array<Telefone> = [];
+        let telefones: string = ''; // Alterado para uma string única
 
         // Permitir o cadastro de múltiplos telefones
         while (true) {
-            let telefoneNumero = this.entrada.receberTexto(`Por favor informe um telefone para contato sem o ddd (ou deixe em branco para finalizar): `);
+            let telefoneNumero = this.entrada.receberTexto(`Por favor, informe um telefone para contato sem o DDD (ou deixe em branco para finalizar): `);
             if (!telefoneNumero || telefoneNumero.trim() === '') {
-            if (telefones.length === 0) {
-            console.log("Pelo menos um telefone deve ser informado. Tente novamente.");
-            continue;
-        }
-            break;
-    }
+                if (!telefones) {
+                    console.log("Pelo menos um telefone deve ser informado. Tente novamente.");
+                    continue;
+                }
+                break;
+            }
         // Adicionar telefone à lista de telefones
         let ddd = this.entrada.receberTexto(`Informe o DDD do telefone: `);
-        let novoTelefone = new Telefone(ddd, telefoneNumero);
-        telefones.push(novoTelefone);
-        
-}  
+        telefones += `(${ddd}) ${telefoneNumero}, `; // Adiciona o telefone à string
+        }
+
         let cpf = new CPF(valor, dataNascimento);
         let cliente = new Cliente(nome, nomeSocial, sexo, cpf, RGs, telefones);
         this.clientes.push(cliente)

@@ -10,7 +10,6 @@ import CadastroProduto from "../negocio/cadastroProduto";
 import ListagemClientes from "../negocio/listagemClientes";
 import casual from 'casual';
 import ListagemProdutosMaisConsumidos from "../negocio/listagemProdutosMaisConsumidos";
-import Telefone from "../modelo/telefone";
 
 
 console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
@@ -26,14 +25,12 @@ for (let i = 1; i <= 30; i++) {
   const sexo = i % 2 === 0 ? "F" : "M"; // Alternando entre Masculino e Feminino
   const cpf = new CPF("1234567890" + i, new Date(`2020-03-${i < 10 ? '0' + i : i}`));
   const rg = new RG("12345678" + i, new Date(`2020-03-${i < 10 ? '0' + i : i}`));
-  const telefone = casual.phone; // Gera um número de telefone fictício
-  // Criar uma instância de Telefone com o número de telefone gerado
-  const telefoneInstancia = new Telefone("DDD", telefone);
+  const telefoneNumero = "129123457" + i;
 
-  // Criar uma lista de telefones (nesse caso, apenas um telefone)
-  const listaTelefones = [telefoneInstancia];
+  // Adaptação para manter o atributo telefone como uma string
+  const telefone = "(" + telefoneNumero.substring(0, 2) + ") " + telefoneNumero.substring(2, 7) + "-" + telefoneNumero.substring(7);
 
-  const cliente = new Cliente(nome, nomeSocial, sexo, cpf, rg, listaTelefones);
+  const cliente = new Cliente(nome, nomeSocial, sexo, cpf, rg, telefone);
 
   // Adicione o cliente à lista da empresa
   empresa.getClientes.push(cliente);
@@ -86,26 +83,31 @@ while (execucao) {
         case 3:
             const idEditarCliente = entrada.receberNumero("Digite o ID do cliente que deseja editar: ");
             const clienteExistente = empresa.getClientes.find((cliente) => cliente.getId === idEditarCliente);
-              
-            if (clienteExistente) {
-                const nomeNovo = entrada.receberTexto(`Digite o novo nome (${clienteExistente.getNome}): `) || clienteExistente.getNome;
-                const nomeSocialNovo = entrada.receberTexto(`Digite o novo nome social (${clienteExistente.getNomeSocial}): `) || clienteExistente.getNomeSocial;
-                const telefoneNovo = entrada.receberTexto(`Digite o novo telefone (${clienteExistente.getTelefones.map(t => t.getNumero).join(', ')}): `);
-                const listaTelefonesNovos: Telefone[] = [];
 
-            if (telefoneNovo) {
-              const novoTelefone = new Telefone("DDD", telefoneNovo);
-              listaTelefonesNovos.push(novoTelefone);
+            if (clienteExistente) {
+              const nomeNovo = entrada.receberTexto(`Digite o novo nome (${clienteExistente.getNome}): `) || clienteExistente.getNome;
+              const nomeSocialNovo = entrada.receberTexto(`Digite o novo nome social (${clienteExistente.getNomeSocial}): `) || clienteExistente.getNomeSocial;
+              const telefoneNovo = entrada.receberTexto(`Digite o novo telefone (${clienteExistente.getTelefones}): `);
+
+            // Ajuste do tipo para string
+              let listaTelefonesNovos: string = '';
+
+            // Adiciona o novo telefone à string se um novo telefone for fornecido
+            if (telefoneNovo && telefoneNovo.trim() !== '') {
+                const dddNovo = entrada.receberTexto(`Informe o DDD do novo telefone: `);
+                listaTelefonesNovos = `(${dddNovo}) ${telefoneNovo}`;
             }
-              
-                // Atualize os dados do cliente diretamente
-                clienteExistente.atualizarDados(nomeNovo, nomeSocialNovo, listaTelefonesNovos);
-              
-                  console.log("Cliente atualizado com sucesso!");
-                } else {
-                  console.log(`Cliente com ID ${idEditarCliente} não encontrado.`);
-                }
-                break;
+
+            // Atualiza os dados do cliente diretamente
+            clienteExistente.atualizarDados(nomeNovo, nomeSocialNovo, listaTelefonesNovos);
+
+            console.log("Cliente atualizado com sucesso!");
+        } else {
+        console.log(`Cliente com ID ${idEditarCliente} não encontrado.`);
+        }
+        break;
+
+          
         case 4:
             const idExcluirCliente = entrada.receberNumero("Digite o ID do cliente que deseja excluir: ");
             const clienteIndex = empresa.getClientes.findIndex((cliente) => cliente.getId === idExcluirCliente);
