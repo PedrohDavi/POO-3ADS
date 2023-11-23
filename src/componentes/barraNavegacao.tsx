@@ -6,28 +6,46 @@ import { Link } from "react-router-dom";
 
  const BarraNavegacao = ()=> {
         return (
-          <Flex>
-            <Box bg={"#ffff00"} width={"100%"} height={"4.5rem"} display={"flex"}justifyContent="right">
-              <Link to="/">
-                  <Text paddingRight={"1.5rem"} color={"#000000"}>Lista de Clientes</Text>
-              </Link>
-              <Link to="/lista-de-produtos">
-                  <Text paddingRight={"1.5rem"} color={"#000000"}>Lista de produtos</Text>
-              </Link>
-              <Link to="/cadastro-de-clientes">
-                <Text paddingRight={"1.5rem"} color={"#000000"}>Cadastrar cliente</Text>
-              </Link>
-              <Link to="/cadastro-de-produtos">
-                <Text paddingRight={"1.5rem"} color={"#000000"}>Cadastrar Produto</Text>
-              </Link>
-              <Link to="/registro-de-consumo">
-                <Text paddingRight={"1.5rem"} color={"#000000"}>Registrar consumo</Text>
-              </Link>
-              <Link to="/listagens">
-                <Text paddingRight={"1.5rem"} color={"#000000"}>Listagens</Text>
-              </Link>
-            </Box>
-          </Flex>
+          <Box
+        bg={"#2c3e50"}
+        width={"100%"}
+        height={"4.5rem"}
+        display={"flex"}
+        justifyContent="space-around"
+        alignItems="center"
+        boxShadow="md"
+      >
+        <Link to="/">
+          <Text color={"#ecf0f1"} _hover={{ color: "#3498db" }}>
+            Lista de Clientes
+          </Text>
+        </Link>
+        <Link to="/lista-de-produtos">
+          <Text color={"#ecf0f1"} _hover={{ color: "#3498db" }}>
+            Lista de Produtos
+          </Text>
+        </Link>
+        <Link to="/cadastro-cliente">
+          <Text color={"#ecf0f1"} _hover={{ color: "#3498db" }}>
+            Cadastrar Cliente
+          </Text>
+        </Link>
+        <Link to="/cadastro-produto">
+          <Text color={"#ecf0f1"} _hover={{ color: "#3498db" }}>
+            Cadastrar Produto
+          </Text>
+        </Link>
+        <Link to="/registrar-consumo">
+          <Text color={"#ecf0f1"} _hover={{ color: "#3498db" }}>
+            Registrar Consumo
+          </Text>
+        </Link>
+        <Link to="/listagens">
+          <Text color={"#ecf0f1"} _hover={{ color: "#3498db" }}>
+            Listagens
+          </Text>
+        </Link>
+      </Box>
         );
       }
 
