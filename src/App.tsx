@@ -4,6 +4,7 @@ import ListaProduto from "./componentes/listaProduto";
 import { FormularioCadastroProduto } from "./componentes/formularioCadastroProduto";
 import { FormularioCadastroCliente } from "./componentes/formularioCadastroCliente";
 import { RegistroDeConsumo } from "./componentes/registroDeConsumo";
+import { Listagens } from "./componentes/listagens";
 
 
 export function App(){
@@ -16,6 +17,7 @@ export function App(){
                 <Route path="/cadastro-produto" element= {<FormularioCadastroProduto/>}/>
                 <Route path="/cadastro-cliente" element= {<FormularioCadastroCliente/>}/>
                 <Route path="/registrar-consumo" element= {<RegistroDeConsumo/>}/>
+                <Route path="/listagens" element={<Listagens/>}/>
             </Routes>
         </BrowserRouter>
     )
